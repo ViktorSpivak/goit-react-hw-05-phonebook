@@ -13,10 +13,10 @@ export class Phonebook extends Component {
       { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
       { id: "id-3", name: "Eden Clements", number: "645-17-79" },
       { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
-      { id: "id-5", name: "ennie kopeland", number: "227-91-26" }
+      { id: "id-5", name: "ennie kopeland", number: "227-91-26" },
     ],
     filter: "",
-    isAnimation: false
+    isAnimation: false,
   };
 
   componentDidUpdate() {
@@ -28,32 +28,32 @@ export class Phonebook extends Component {
     contactsFromStorage && this.setState({ contacts: contactsFromStorage });
   }
 
-  handleFindOverlap = newName =>
-    this.state.contacts.some(contact =>
+  handleFindOverlap = (newName) =>
+    this.state.contacts.some((contact) =>
       contact.name
         .toLowerCase()
         .split(" ")
-        .some(name => name === newName.toLowerCase())
+        .some((name) => name === newName.toLowerCase())
     );
-  handleChangeFilter = value => {
+  handleChangeFilter = (value) => {
     this.setState({ filter: value });
   };
   handleFindContacts = () =>
-    this.state.contacts.filter(contact =>
+    this.state.contacts.filter((contact) =>
       contact.name
         .toLowerCase()
         .split(" ")
-        .some(name => name.startsWith(this.state.filter.toLowerCase()))
+        .some((name) => name.startsWith(this.state.filter.toLowerCase()))
     );
-  handleDeleteContact = ev => {
+  handleDeleteContact = (ev) => {
     ev.persist();
-    this.setState(state => ({
-      contacts: state.contacts.filter(contact => contact.id !== ev.target.id)
+    this.setState((state) => ({
+      contacts: state.contacts.filter((contact) => contact.id !== ev.target.id),
     }));
   };
-  handleCheckIn = newContact => {
-    this.setState(state => ({
-      contacts: [...state.contacts, newContact]
+  handleCheckIn = (newContact) => {
+    this.setState((state) => ({
+      contacts: [...state.contacts, newContact],
     }));
   };
 
@@ -72,7 +72,7 @@ export class Phonebook extends Component {
           onFindOverlap={this.handleFindOverlap}
         />
         <h2>Contacts</h2>
-        {this.state.contacts.length > 0 && (
+        {this.state.contacts.length && (
           <Filter onFindContact={this.handleChangeFilter}></Filter>
         )}
         <ContactList
